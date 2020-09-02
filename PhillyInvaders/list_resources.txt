@@ -1,0 +1,5 @@
+IMAGE_SPACE_BACKGROUND,                	assets/space_background.png
+IMAGE_PLAYER_SHIP,				 		assets/player_ship.png
+IMAGE_PLAYER_PROJECTILE,				assets/player_projectile.png
+IMAGE_ENEMY_SHIP,						assets/enemy_ship.png
+IMAGE_ENEMY_PROJECTILE,					assets/enemy_projectile.png
