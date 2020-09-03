@@ -96,6 +96,13 @@
       <AdditionalLibraryDirectories>$(ProjectDir)Libs\SDL\lib\x86;$(ProjectDir)Libs\glew\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;SDLmain.lib;SDL.lib;SDL_Image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /E "$(SolutionDir)$(ProjectName)\Libs\glew\bin\*.dll" "$(TargetDir)"
+xcopy /E "$(SolutionDir)$(ProjectName)\Libs\SDL\lib\x86\*.dll" "$(TargetDir)"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy glew and SDL binaries</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
