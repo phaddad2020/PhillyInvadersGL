@@ -13,6 +13,7 @@
 #include <stdint.h>
 
 #include "Ship.h"
+#include "STimer.h"
 
 /// <summary>
 /// This is the base enemy ship controlling class.
@@ -32,6 +33,8 @@ public:
 	int32_t GetShipImageResource() override;
 
 private:
+	STimer start_time;
+	int32_t fire_chance;
 
 };
 

@@ -9,6 +9,7 @@
 
 #include <stdint.h>
 
+#include "common.h"
 #include "agl_renderer.h"
 #include "resources_enum.h"
 
@@ -16,12 +17,13 @@
 
 #define PROJECTILE_MOVE_SPEED_PER_SEC	750
 
-Projectile::Projectile(int32_t image_idx, int32_t start_pos_x, int32_t start_pos_y)
+Projectile::Projectile(int32_t image_idx, int32_t start_pos_x, int32_t start_pos_y, eProjectDir dir)
 {
 	pos_x = start_pos_x;
 	pos_y = start_pos_y;
 	move_speed_per_sec = PROJECTILE_MOVE_SPEED_PER_SEC;
 	rc_idx = image_idx;
+	proj_dir = dir;
 }
 
 Projectile::~Projectile()
@@ -31,10 +33,20 @@ Projectile::~Projectile()
 
 int Projectile::Update(float delta_time)
 {
-	pos_y -= (int32_t)(move_speed_per_sec * delta_time);
+	if (proj_dir == PROJECTILE_DIR_UP)
+	{
+		pos_y -= (int32_t)(move_speed_per_sec * delta_time);
 
-	if (pos_y <= 0)
-		return 1;
+		if (pos_y <= 0)
+			return 1;
+	}
+	else
+	{
+		pos_y += (int32_t)(move_speed_per_sec * delta_time);
+
+		if (pos_y >= (GAME_HEIGHT - 5))
+			return 1;
+	}
 
 	return 0;
 }

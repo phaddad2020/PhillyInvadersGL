@@ -37,7 +37,7 @@ public:
 
 protected:
 
-	void addBullet(int32_t projectile_img_idx);
+	void addBullet(int32_t projectile_img_idx, eProjectDir dir);
 	void destroyBullet(size_t index);
 
 	std::vector<Projectile*> ship_bullets;

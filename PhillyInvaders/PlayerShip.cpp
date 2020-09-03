@@ -62,7 +62,7 @@ void PlayerShip::Update(InputHandler *input_handler, float delta_time, std::vect
 			if (shoot_start == 0)
 			{
 				shoot_start = STimer_GetTime();
-				addBullet(IMAGE_PLAYER_PROJECTILE);
+				addBullet(IMAGE_PLAYER_PROJECTILE, PROJECTILE_DIR_UP);
 			}
 		}
 	}

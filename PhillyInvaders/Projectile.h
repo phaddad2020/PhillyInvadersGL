@@ -16,10 +16,16 @@
 
 #include "ResourceManager.h"
 
+typedef enum e_projectile_dir
+{
+	PROJECTILE_DIR_UP		= 0,
+	PROJECTILE_DIR_DOWN,
+} eProjectDir;
+
 class Projectile
 {
 public:
-	Projectile(int32_t image_idx, int32_t start_pos_x, int32_t start_pos_y);
+	Projectile(int32_t image_idx, int32_t start_pos_x, int32_t start_pos_y, eProjectDir dir);
 	~Projectile();
 
 	int Update(float delta_time);
@@ -33,6 +39,7 @@ private:
 	int32_t pos_y;
 	int32_t move_speed_per_sec;
 	int32_t rc_idx;
+	eProjectDir proj_dir;
 };
 
 #endif

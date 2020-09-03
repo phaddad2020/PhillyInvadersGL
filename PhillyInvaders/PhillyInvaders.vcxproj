@@ -162,6 +162,7 @@ rmdir /Q /S "$(TargetDir)assets"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicRand.cpp" />
     <ClCompile Include="EnemyShip.cpp" />
     <ClCompile Include="EnemyShipManager.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -173,6 +174,7 @@ rmdir /Q /S "$(TargetDir)assets"</Command>
     <ClCompile Include="Ship.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicRand.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="EnemyShip.h" />
     <ClInclude Include="EnemyShipManager.h" />

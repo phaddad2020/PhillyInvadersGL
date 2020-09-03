@@ -12,6 +12,7 @@
 #include <stdint.h>
 
 #include "common.h"
+#include "BasicRand.h"
 #include "PhillyInvaders.h"
 #include "resources_enum.h"
 
@@ -48,6 +49,9 @@ int PhillyInvaders::Initialize()
 	rc_manager = std::make_unique<ResourceManager>();
 
 	rc_manager->LoadResources(RC_FILE);
+
+	// Initialize basic RNG
+	BaseRand_Init();
 
 	input_handler = std::make_unique<InputHandler>();
 	player_ship = std::make_unique<PlayerShip>();

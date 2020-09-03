@@ -131,9 +131,9 @@ int32_t Ship::GetShipPosY()
 	return ship_pos_y;
 }
 
-void Ship::addBullet(int32_t projectile_img_idx)
+void Ship::addBullet(int32_t projectile_img_idx, eProjectDir dir)
 {
-	Projectile* new_bullet = new Projectile(projectile_img_idx, ship_pos_x, ship_pos_y);
+	Projectile* new_bullet = new Projectile(projectile_img_idx, ship_pos_x, ship_pos_y, dir);
 	ship_bullets.push_back(new_bullet);
 }
 
