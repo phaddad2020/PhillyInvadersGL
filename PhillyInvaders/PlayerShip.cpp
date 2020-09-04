@@ -16,6 +16,7 @@
 #include "PlayerShip.h"
 
 #define PLAYER_SHIP_SHOOT_INTERVAL_TIME	333333	// This is in microseconds (shoot 3 times a second)
+#define PLAYER_SHIP_HEALTH_BAR_REP		25
 
 PlayerShip::PlayerShip()
 {
@@ -41,28 +42,31 @@ void PlayerShip::Update(InputHandler *input_handler, float delta_time, std::vect
 {
 	if (input_handler)
 	{
-		if (input_handler->IsKeyDown(SDLK_d))
+		if (active)
 		{
-			ship_pos_x += (int32_t)(ship_move_per_sec * delta_time);
-
-			if (ship_pos_x >= (GAME_WIDTH - (ship_width / 2)))
-				ship_pos_x = (GAME_WIDTH - (ship_width / 2));
-		}
-
-		if (input_handler->IsKeyDown(SDLK_a))
-		{
-			ship_pos_x -= (int32_t)(ship_move_per_sec * delta_time);
-
-			if (ship_pos_x <= (ship_width / 2))
-				ship_pos_x = (ship_width / 2);
-		}
-
-		if (input_handler->IsKeyDown(SDLK_SPACE))
-		{
-			if (shoot_start == 0)
+			if (input_handler->IsKeyDown(SDLK_d))
 			{
-				shoot_start = STimer_GetTime();
-				addBullet(IMAGE_PLAYER_PROJECTILE, PROJECTILE_DIR_UP);
+				ship_pos_x += (int32_t)(ship_move_per_sec * delta_time);
+
+				if (ship_pos_x >= (GAME_WIDTH - (ship_width / 2)))
+					ship_pos_x = (GAME_WIDTH - (ship_width / 2));
+			}
+
+			if (input_handler->IsKeyDown(SDLK_a))
+			{
+				ship_pos_x -= (int32_t)(ship_move_per_sec * delta_time);
+
+				if (ship_pos_x <= (ship_width / 2))
+					ship_pos_x = (ship_width / 2);
+			}
+
+			if (input_handler->IsKeyDown(SDLK_SPACE))
+			{
+				if (shoot_start == 0)
+				{
+					shoot_start = STimer_GetTime();
+					addBullet(IMAGE_PLAYER_PROJECTILE, PROJECTILE_DIR_UP);
+				}
 			}
 		}
 	}
@@ -85,9 +89,24 @@ void PlayerShip::Render(ResourceManager *rc_manager, float z_layer)
 	Ship::Render(rc_manager, z_layer);
 
 	// Render any after effects here
+
+	// Lets draw the ship health here
+	int health_rep = ship_health / PLAYER_SHIP_HEALTH_BAR_REP;
+	for (int i = 0; i < health_rep; ++i)
+		AGL_RenderImage(rc_manager->GetImageDataResource(IMAGE_SHIP_HEALTH_BAR), (35 * (i + 1)), 45, -0.3f);
 }
 
 int32_t PlayerShip::GetShipImageResource()
 {
 	return IMAGE_PLAYER_SHIP;
+}
+
+int32_t PlayerShip::GetProjectileDamage()
+{
+	return 100;
+}
+
+int32_t PlayerShip::GetProjectileSpeed()
+{
+	return 750;
 }

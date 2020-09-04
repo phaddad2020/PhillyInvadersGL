@@ -25,7 +25,7 @@ typedef enum e_projectile_dir
 class Projectile
 {
 public:
-	Projectile(int32_t image_idx, int32_t start_pos_x, int32_t start_pos_y, eProjectDir dir);
+	Projectile(int32_t image_idx, int32_t start_pos_x, int32_t start_pos_y, eProjectDir dir, int32_t dmg, int32_t speed);
 	~Projectile();
 
 	int Update(float delta_time);
@@ -33,12 +33,15 @@ public:
 
 	int32_t GetPosX();
 	int32_t GetPosY();
+	int32_t GetDamage();
 
 private:
 	int32_t pos_x;
 	int32_t pos_y;
 	int32_t move_speed_per_sec;
 	int32_t rc_idx;
+	int32_t proj_damage;
+	int32_t proj_speed;
 	eProjectDir proj_dir;
 };
 

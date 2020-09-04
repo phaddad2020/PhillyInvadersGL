@@ -40,6 +40,7 @@ void Ship::Initialize(int32_t pos_x, int32_t pos_y, int32_t health,
 	ship_pos_x = pos_x;
 	ship_pos_y = pos_y;
 	ship_health = health;
+	ship_max_health = health;
 	ship_move_per_sec = move_per_sec;
 	ship_move_speed = move_speed;
 	ship_width = width;
@@ -58,8 +59,11 @@ void Ship::Update(InputHandler* input_handler, float delta_time, std::vector<Shi
 				if (ship_list[j]->ShipHit(ship_bullets[i]->GetPosX(), ship_bullets[i]->GetPosY()))
 				{
 					std::cout << "SHIP HIT" << std::endl;
+
+					ship_list[j]->RemoveHealth(ship_bullets[i]->GetDamage());
+					if (ship_list[j]->GetShipHealth() == 0)
+						ship_list[j]->SetActive(false);
 					destroyBullet(i);
-					ship_list[j]->SetActive(false);
 					// This bullet is destroyed so we leave the loop. Of course we would want to revisit this
 					// in the case of special bullets that would allow a single bullet to destroy multiple ships
 					break;
@@ -121,6 +125,22 @@ bool Ship::ShipHit(int32_t x_pos, int32_t y_pos)
 	return false;
 }
 
+void Ship::RemoveHealth(int32_t health)
+{
+	ship_health -= health;
+
+	if (ship_health < 0)
+		ship_health = 0;
+}
+
+void Ship::AddHealth(int32_t health)
+{
+	ship_health += health;
+
+	if (ship_health > ship_max_health)
+		ship_health = ship_max_health;
+}
+
 int32_t Ship::GetShipPosX()
 {
 	return ship_pos_x;
@@ -131,9 +151,19 @@ int32_t Ship::GetShipPosY()
 	return ship_pos_y;
 }
 
+int32_t Ship::GetShipHealth()
+{
+	return ship_health;
+}
+
 void Ship::addBullet(int32_t projectile_img_idx, eProjectDir dir)
 {
-	Projectile* new_bullet = new Projectile(projectile_img_idx, ship_pos_x, ship_pos_y, dir);
+	Projectile* new_bullet = new Projectile(projectile_img_idx, 
+		ship_pos_x, 
+		ship_pos_y, 
+		dir, 
+		GetProjectileDamage(), 
+		GetProjectileSpeed());
 	ship_bullets.push_back(new_bullet);
 }
 

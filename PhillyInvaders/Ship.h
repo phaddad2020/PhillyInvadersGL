@@ -30,10 +30,15 @@ public:
 	virtual void SetPosition(int32_t x_pos, int32_t y_pos);
 	virtual void SetActive(bool set_active);
 	virtual bool ShipHit(int32_t x_pos, int32_t y_pos);
+	virtual void RemoveHealth(int32_t health);
+	virtual void AddHealth(int32_t health);
 	virtual int32_t GetShipImageResource() = 0;
+	virtual int32_t GetProjectileDamage() = 0;
+	virtual int32_t GetProjectileSpeed() = 0;
 
 	int32_t GetShipPosX();
 	int32_t GetShipPosY();
+	int32_t GetShipHealth();
 
 protected:
 
@@ -44,6 +49,7 @@ protected:
 	int32_t ship_pos_x;
 	int32_t ship_pos_y;
 	int32_t ship_health;
+	int32_t ship_max_health;
 	int32_t ship_move_per_sec;
 	int32_t ship_width;
 	int32_t ship_height;

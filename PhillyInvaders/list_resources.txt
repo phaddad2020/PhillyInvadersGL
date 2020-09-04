@@ -3,3 +3,4 @@ IMAGE_PLAYER_SHIP,				 		assets/player_ship.png
 IMAGE_PLAYER_PROJECTILE,				assets/player_projectile.png
 IMAGE_ENEMY_SHIP,						assets/enemy_ship.png
 IMAGE_ENEMY_PROJECTILE,					assets/enemy_projectile.png
+IMAGE_SHIP_HEALTH_BAR,					assets/ship_health_bar.png

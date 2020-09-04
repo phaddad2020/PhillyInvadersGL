@@ -17,13 +17,15 @@
 
 #define PROJECTILE_MOVE_SPEED_PER_SEC	750
 
-Projectile::Projectile(int32_t image_idx, int32_t start_pos_x, int32_t start_pos_y, eProjectDir dir)
+Projectile::Projectile(int32_t image_idx, int32_t start_pos_x, int32_t start_pos_y, eProjectDir dir, int32_t dmg, int32_t speed)
 {
 	pos_x = start_pos_x;
 	pos_y = start_pos_y;
-	move_speed_per_sec = PROJECTILE_MOVE_SPEED_PER_SEC;
+	move_speed_per_sec = speed;
 	rc_idx = image_idx;
 	proj_dir = dir;
+	proj_speed = speed;
+	proj_damage = dmg;
 }
 
 Projectile::~Projectile()
@@ -67,4 +69,9 @@ int32_t Projectile::GetPosX()
 int32_t Projectile::GetPosY()
 {
 	return pos_y;
+}
+
+int32_t Projectile::GetDamage()
+{
+	return proj_damage;
 }

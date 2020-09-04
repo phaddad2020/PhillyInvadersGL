@@ -37,6 +37,8 @@ public:
 	void Render(ResourceManager* rc_manager, float z_layer) override;
 
 	int32_t GetShipImageResource() override;
+	int32_t GetProjectileDamage() override;
+	int32_t GetProjectileSpeed() override;
 
 private:
 	STimer shoot_start;

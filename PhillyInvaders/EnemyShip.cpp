@@ -75,3 +75,13 @@ int32_t EnemyShip::GetShipImageResource()
 {
 	return IMAGE_ENEMY_SHIP;
 }
+
+int32_t EnemyShip::GetProjectileDamage()
+{
+	return 25;
+}
+
+int32_t EnemyShip::GetProjectileSpeed()
+{
+	return 325;
+}
